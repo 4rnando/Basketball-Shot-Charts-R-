@@ -1,0 +1,25 @@
+#install the package
+install.packages("BasketballAnalyzeR")
+
+#load the package
+library("BasketballAnalyzeR")
+
+PbP <- PbPmanipulation(PbP.BDB)
+
+subdata <- subset(PbP, player=="Stephen Curry")
+ubdata$xx <- subdata$original_x/10
+subdata$yy <- subdata$original_y/10-41.75
+
+#This function splts the court into 5 sectors with colors based on the time it took to release the basketball. 
+#It also displays a percentage based on the accuracy of the attempted shot.
+shotchart(data=subdata, x="xx", y="yy", scatter = F,
+          num.sect = 5,
+          type = 'sectors',
+          z='playlength',
+          result = 'result')
+#This function changes the background into black and categorizes and paints the attempted shots into two; made or missed into red and yellow.
+shotchart(data=subdata, x="xx", y="yy", scatter = T,
+          z='result',
+          bg.col = 'black',
+          courtline.col = 'white',
+          palette = 'hot')
